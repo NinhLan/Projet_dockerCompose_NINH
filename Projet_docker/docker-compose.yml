@@ -1,0 +1,21 @@
+version: "3"
+#1 service = 1 container 
+
+services:
+  serveur:
+    build: serveur/
+    command: python ./serveur.py
+    ports:
+      - 1234:1234
+
+  client:
+    #où on trouve le fichier Dockerfile du client
+    build: client/
+    command: python ./client.py
+    network_mode: host
+    #Le mot clé 'depends_on' permet de définir si le service doit attendre 
+    #que d'autres services soient prêts avant de se lancer.
+    # Ici, nous voulons que le service 'client' attende que 
+    #le service 'serveur' soit prêt
+    depends_on:
+      - serveur
