@@ -1,14 +1,18 @@
+# Dockerfile doit toujours commencer par importer l'image de base.
+# Nous utilisons le mot clé 'FROM' pour le faire.
+# Dans notre exemple, nous voulons importer l'image python (de DockerHub).
+# Donc, nous écrivons 'python' pour le nom de l'image et 'latest' pour la version.
 FROM python:latest
 
-# In order to launch our python code, we must import the 'server.py' and 'index.html' file.
-# We use the keyword 'ADD' to do that.
-# Just a remember, the first parameter 'server.py' is the name of the file on the host.
-# The second parameter '/server/' is the path where to put the file on the image.
-# Here we put files at the image '/server/' folder.
+# Afin de lancer notre code python, nous devons importer le fichier 'serveur.py' et 'index.html'.
+# Nous utilisons le mot clé 'ADD' pour ce faire.
+# Pour rappel, le premier paramètre 'serveur.py' est le nom du fichier sur l'hôte.
+# Le second paramètre '/serveur/' est le chemin où placer le fichier sur l'image.
+# Ici, nous plaçons les fichiers dans le dossier '/serveur/' de l'image.
 ADD serveur.py /serveur/
 ADD index.html /serveur/
 
-# I would like to introduce something new, the 'WORKDIR' command.
-# This command changes the base directory of your image.
-# Here we define '/server/' as base directory (where all commands will be executed).
+# Je voudrais introduire quelque chose de nouveau, la commande 'WORKDIR'.
+# Cette commande change le répertoire de base de votre image.
+# Ici nous définissons '/serveur/' comme répertoire de base (où toutes les commandes seront exécutées).
 WORKDIR /serveur/
