@@ -23,7 +23,7 @@ Projet_docker/
 └── docker-compose.yml
 ```
 ## Créer un client
-1. Créer des fichiers  
+### 1. Créer des fichiers  
 Dans le dossier j’ai créé des ficher suivant :  
 * Un fichier __'client.py'__ (fichier python qui contiendra le code du client).
 * Un fichier __'Dockerfile'__ (fichier docker qui contiendra les instructions nécessaires pour créer l'environnement du client).  
@@ -34,7 +34,7 @@ Normalement, vous devriez avoir cette architecture de dossier dans le chemin sui
 ├── client.py
 └── Dockerfile
 ```
-2. Edite fichier Python.  
+### 2. Edite fichier Python.  
 Ce code me permet de récupérer le contenu de la page web du serveur et de l'afficher.
 ```
 #!/usr/bin/env python3
@@ -62,7 +62,7 @@ print(decodedContent)
 fp.close()
 ```
 
-3. Edit the Docker file  
+### 3. Edit the Docker file  
 Quant au serveur, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python.  
 
 ```
@@ -78,7 +78,7 @@ WORKDIR /client/
 
 ```
 ## Créer un serveur
-1. Créer des fichiers   
+### 1. Créer des fichiers   
 Dans le dossier j’ai créé des ficher suivant :  
 * Un fichier 'serveur.py' (fichier python qui contient le code du serveur).
 * Un fichier 'index.html' (fichier HTML qui contiendra la phrase à afficher).
@@ -92,7 +92,7 @@ Architecture de dossier dans le chemin suivant 'serveur/' :
 └─── serveur.py
 
 ```
-2. Ficher python  
+### 2. Ficher python  
 Ce code permet de créer un simple serveur web à l'intérieur de ce dossier. Il récupérera le contenu du fichier index.html pour le partager sur une page web.
 ```
 #!/usr/bin/env python3
@@ -113,13 +113,13 @@ with socketserver.TCPServer(("", 1234), handler) as httpd :
 
 ```
 
-3. Fichier HTML  
+### 3. Fichier HTML  
 ```
 Bonjour, je suis Thi Hoa Lan NINH – étudiante d’EPISEN
 ```
 Le serveur partagera ce fichier au démarrage, et cette phrase s'affichera.
 
-4. Fichier Docker file  
+### 4. Fichier Docker file  
 Ici, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python. Pour ce faire, nous allons utiliser l'image officielle créée pour exécuter Python.
 
 ```
