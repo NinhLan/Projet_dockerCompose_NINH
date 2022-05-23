@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 
-# Import of python system library.
-# This library is used to download the 'index.html' from server.
-# You don't have to install anything special, this library is installed with Python.
+# Importation de la bibliothèque système python.
+# Cette bibliothèque est utilisée pour télécharger le fichier 'index.html' du serveur.
 import urllib.request
 
-# This variable contain the request on 'http://localhost:1234/'.
-# You must wondering what is 'http://localhost:1234'?
-# localhost: This means that the server is local.
-# 1234: Remember we define 1234 as the server port.
+# Cette variable contient la requête sur 'http://localhost:1234/'.
+# localhost : Cela signifie que le serveur est local.
+# 1234 : Rappelez-vous que nous avons défini 1234 comme le port du serveur.
+fp = urllib.request.urlopen("http://localhost:1234/")
 fp = urllib.request.urlopen("http://localhost:1234/")
 
-# 'encodedContent' correspond to the server response encoded ('index.html').
-# 'decodedContent' correspond to the server response decoded (what we want to display).
+# 'encodedContent' correspond à la réponse du serveur encodée ('index.html').
+# 'decodedContent' correspond à la réponse du serveur décodée (ce que nous voulons afficher).
 encodedContent = fp.read()
-decodedContent = encodedContent.decode("utf8")
+decodedContent = encoded
+Content.decode("utf8")
 
-# Display the server file: 'index.html'.
+# Affiche le fichier du serveur : 'index.html'.
 print(decodedContent)
 
-# Close the server connection.
+# Fermez la connexion au serveur.
 fp.close()
