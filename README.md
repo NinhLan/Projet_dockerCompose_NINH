@@ -215,7 +215,11 @@ $ docker-compose up
 ```
 ## Résultat
 
-Maintenant, on peut voir s’afficher la phrase qu’on a mis dans html dans notre terminal.
+Maintenant, on peut voir s’afficher la phrase qu’on a mis dans html dans notre terminal.  
+
+![alt text](https://github.com/NinhLan/Projet_dockerCompose_NINH/blob/5439c9e47e2948a2e2d0eb857901f582970703d2/images/b.png?raw=true)
  
-Ou dans une navigateur web 
+Ou dans une navigateur web  
+
+![alt text](https://github.com/NinhLan/Projet_dockerCompose_NINH/blob/5439c9e47e2948a2e2d0eb857901f582970703d2/images/a.png?raw=true)
  
