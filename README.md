@@ -11,7 +11,7 @@ L'objectif de ce projet est de créer un petit site web (serveur) en Python qui 
 Pour créer mon application client/serveur, j'ai créé un dossier sur ma VM linux. Il contient à la racine le fichier et les dossiers suivants :  
 
 * Un fichier __'docker-compose.yml'__  (fichier docker-compose qui contient les instructions nécessaires à la création des différents services).  
-* Un dossier __'server'__  (ce dossier contient les fichiers nécessaires à la mise en place du serveur).  
+* Un dossier __'serveur'__  (ce dossier contient les fichiers nécessaires à la mise en place du serveur).  
 * Un dossier __'client'__  (ce dossier contient les fichiers nécessaires à la mise en place du client).  
 
 L'architecture des dossier de mon projet est ci-dessous :  
@@ -34,7 +34,7 @@ Normalement, vous devriez avoir cette architecture de dossier dans le chemin sui
 ├── client.py
 └── Dockerfile
 ```
-2. Edite fichier Python.
+2. Edite fichier Python.  
 Ce code me permet de récupérer le contenu de la page web du serveur et de l'afficher.
 ```
 #!/usr/bin/env python3
@@ -62,13 +62,12 @@ print(decodedContent)
 fp.close()
 ```
 
-3. Edit the Docker file
+3. Edit the Docker file  
 Quant au serveur, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python.  
 
 ```
 FROM python:latest
 
-# Même chose que le Dockerfile *server*.
 # Nous importons *client.py* dans le dossier */client/*.
 ADD client.py /client/
 
@@ -79,12 +78,12 @@ WORKDIR /client/
 
 ```
 ## Créer un serveur
-1. Créer des fichiers  
+1. Créer des fichiers   
 Dans le dossier j’ai créé des ficher suivant :  
-* Un fichier 'server.py' (fichier python qui contient le code du serveur).
+* Un fichier 'serveur.py' (fichier python qui contient le code du serveur).
 * Un fichier 'index.html' (fichier HTML qui contiendra la phrase à afficher).
 * Un fichier 'Dockerfile' (fichier docker qui contiendra les instructions nécessaires pour créer l'environnement du serveur).
-Architecture de dossier dans le chemin suivant 'server/' :
+Architecture de dossier dans le chemin suivant 'serveur/' :
 
 ```
 .
@@ -93,7 +92,7 @@ Architecture de dossier dans le chemin suivant 'server/' :
 └─── serveur.py
 
 ```
-2. Ficher python 
+2. Ficher python  
 Ce code permet de créer un simple serveur web à l'intérieur de ce dossier. Il récupérera le contenu du fichier index.html pour le partager sur une page web.
 ```
 #!/usr/bin/env python3
@@ -114,13 +113,13 @@ with socketserver.TCPServer(("", 1234), handler) as httpd :
 
 ```
 
-3. Fichier HTML
+3. Fichier HTML  
 ```
 Bonjour, je suis Thi Hoa Lan NINH – étudiante d’EPISEN
 ```
 Le serveur partagera ce fichier au démarrage, et cette phrase s'affichera.
 
-4. Fichier Docker file
+4. Fichier Docker file  
 Ici, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python. Pour ce faire, nous allons utiliser l'image officielle créée pour exécuter Python.
 
 ```
@@ -144,7 +143,7 @@ ADD index.html /serveur/
 WORKDIR /serveur/
 ```
 
- ## Docker Compose
+ ## Docker Compose  
 Maintenant nous allons éditer le fichier 'docker-compose.yml' à la racine du dépôt.
 ```
 # docker-compose fonctionne avec des services.
