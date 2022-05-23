@@ -1,12 +1,12 @@
 # Projet_dockerCompose_NINH
 
 ## L’objectif du projet
-Dans la cadre de ce module, je me decide de faire un projet de Docker Compose qui contient 2 coteneur différent(Serveur et client).
+Dans la cadre de ce module, j'ai décidé de faire un projet Docker Compose qui contient 2 conteneurs différents (Serveur et client).
 
 L'objectif de ce projet est de créer un petit site web (serveur) en Python qui contiendra une phrase. Cette phrase doit être récupérée par un programme (client) en Python qui affichera la phrase.
 
 
-## Créer le projet
+## Création du projet
 
 Pour créer mon application client/serveur, j'ai créé un dossier sur ma VM linux. Il contient à la racine le fichier et les dossiers suivants :  
 
@@ -22,21 +22,20 @@ Projet_docker/
 ├── serveur/
 └── docker-compose.yml
 ```
-## Créer un client
-### 1. Créer des fichiers  
-Dans le dossier j’ai créé des ficher suivant :  
+## Création du client
+### 1. Création des fichiers  
+Dans le dossier j’ai créé les fichiers suivant :  
 * Un fichier __'client.py'__ (fichier python qui contiendra le code du client).
 * Un fichier __'Dockerfile'__ (fichier docker qui contiendra les instructions nécessaires pour créer l'environnement du client).  
-Normalement, vous devriez avoir cette architecture de dossier dans le chemin suivant 'client/' :
-
+Dans le dossier 'client/' l'architecture est donc :
 ```
 .
 ├── client.py
 └── Dockerfile
 ```
-### 2. Edite fichier Python.  
+### 2. Modifier le fichier Python.  
 Ce code me permet de récupérer le contenu de la page web du serveur et de l'afficher.
-```
+```python
 #!/usr/bin/env python3
 
 # Importation de la bibliothèque système python.
@@ -45,7 +44,7 @@ import urllib.request
 
 # Cette variable contient la requête sur 'http://localhost:1234/'.
 # localhost : Cela signifie que le serveur est local.
-# 1234 : Rappelez-vous que nous avons défini 1234 comme le port du serveur.
+# 1234 : Nous avons défini 1234 comme le port du serveur.
 fp = urllib.request.urlopen("http://localhost:1234/")
 fp = urllib.request.urlopen("http://localhost:1234/")
 
@@ -58,28 +57,28 @@ Content.decode("utf8")
 # Affiche le fichier du serveur : 'index.html'.
 print(decodedContent)
 
-# Fermez la connexion au serveur.
+# Fermer la connexion au serveur.
 fp.close()
 ```
 
-### 3. Edit the Docker file  
+### 3. Modifier le Dockerfile  
 Quant au serveur, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python.  
 
-```
+```python
 FROM python:latest
 
 # Nous importons *client.py* dans le dossier */client/*.
 ADD client.py /client/
 
-# Je voudrais introduire quelque chose de nouveau, la commande *WORKDIR*.
+# Je vais maintenant introduire quelque chose de nouveau, la commande *WORKDIR*.
 # Cette commande change le répertoire de base de votre image.
 # Ici nous définissons */client/* comme répertoire de base.
 WORKDIR /client/
 
 ```
-## Créer un serveur
-### 1. Créer des fichiers   
-Dans le dossier j’ai créé des ficher suivant :  
+## Création du serveur
+### 1. Création des fichiers   
+Dans le dossier j’ai créé les fichiers suivant :  
 * Un fichier 'serveur.py' (fichier python qui contient le code du serveur).
 * Un fichier 'index.html' (fichier HTML qui contiendra la phrase à afficher).
 * Un fichier 'Dockerfile' (fichier docker qui contiendra les instructions nécessaires pour créer l'environnement du serveur).
@@ -94,7 +93,7 @@ Architecture de dossier dans le chemin suivant 'serveur/' :
 ```
 ### 2. Ficher python  
 Ce code permet de créer un simple serveur web à l'intérieur de ce dossier. Il récupérera le contenu du fichier index.html pour le partager sur une page web.
-```
+```python
 #!/usr/bin/env python3
 
 # Importation des bibliothèques système python.
@@ -106,7 +105,7 @@ import socketserver
 handler = http.server.SimpleHTTPRequestHandler
 
 # Ici nous définissons que nous voulons démarrer le serveur sur le port 1234.
-# Essayez de vous souvenir de cette information, elle nous sera très utile plus tard avec docker-compose.
+# Cette information nous sera très utile plus tard avec docker-compose.
 with socketserver.TCPServer(("", 1234), handler) as httpd :
   # Cette instruction va maintenir le serveur en fonctionnement, en attendant les requêtes du client.
   httpd.serve_forever()
@@ -119,10 +118,10 @@ Bonjour, je suis Thi Hoa Lan NINH – étudiante d’EPISEN
 ```
 Le serveur partagera ce fichier au démarrage, et cette phrase s'affichera.
 
-### 4. Fichier Docker file  
+### 4. Fichier Dockerfile  
 Ici, nous allons créer un Dockerfile de base qui sera chargé d'exécuter notre fichier Python. Pour ce faire, nous allons utiliser l'image officielle créée pour exécuter Python.
 
-```
+```python
 # Dockerfile doit toujours commencer par importer l'image de base.
 # Nous utilisons le mot clé 'FROM' pour le faire.
 # Dans notre exemple, nous voulons importer l'image python (de DockerHub).
@@ -137,7 +136,7 @@ FROM python:latest
 ADD serveur.py /serveur/
 ADD index.html /serveur/
 
-# Je voudrais introduire quelque chose de nouveau, la commande 'WORKDIR'.
+# La commande *WORKDIR* comme vu précédemment.
 # Cette commande change le répertoire de base de votre image.
 # Ici nous définissons '/serveur/' comme répertoire de base (où toutes les commandes seront exécutées).
 WORKDIR /serveur/
@@ -157,8 +156,7 @@ services :
   # Il va vous permettre de définir à quoi correspond le service.
   # Nous utilisons le mot clé 'serveur' pour le serveur.
   serveur :
-    # Le mot clé "build" permet de définir
-    # le chemin vers le Dockerfile à utiliser pour créer l'image
+    # Le mot clé "build" permet de définir le chemin vers le Dockerfile à utiliser pour créer l'image
     # qui vous permettra d'exécuter le service.
     # Ici, 'serveur/' correspond au chemin d'accès au dossier du serveur
     # qui contient le Dockerfile à utiliser.
@@ -170,7 +168,7 @@ services :
 
     # Rappelez-vous que nous avons défini dans 'serveur/serveur.py' 1234 comme port.
     # Si nous voulons accéder au serveur depuis notre ordinateur (en dehors du conteneur),
-    # nous devons partager le port du contenu avec le port de notre ordinateur.
+    # nous devons partager le port du conteneur avec le port de notre ordinateur.
     # Pour ce faire, le mot clé 'ports' nous aidera.
     # Sa syntaxe est la suivante : [port que nous voulons sur notre machine] : [port que nous voulons récupérer dans le conteneur]
     # Dans notre cas, nous voulons utiliser le port 1234 sur notre machine et
@@ -191,7 +189,7 @@ services :
     commande : python ./client.py
 
     # Le mot clé 'network_mode' est utilisé pour définir le type de réseau.
-    # Ici, nous définissons que le conteneur peut accéder à 'localhost' de l'ordinateur.
+    # Ici, nous définissons que le conteneur peut accéder au 'localhost' de l'ordinateur.
     network_mode : host
 
     # Le mot clé 'depends_on' permet de définir si le service
@@ -200,16 +198,16 @@ services :
     depends_on :
       - serveur
 ```
-##Build Docker-Compose
-Une fois le docker-compose mis en place, il faut construire votre application client/serveur. Cette étape correspond à la commande 'docker build' mais appliquée aux différents services.
+## Build Docker-Compose
+Une fois le docker-compose mis en place, il faut construire notre application client/serveur. Cette étape correspond à la commande 'docker build' mais appliquée aux différents services.
 
-```
+```bash
 $ docker-compose build
 ```
 
 ## Run Docker-Compose
 Le docker-compose est build. Il est maintenant temps de démarrer. Cette étape correspond à la commande 'docker run' mais appliquée aux différents services.
-```
+```bash
 $ docker-compose up
 ```
 ## Résultat
@@ -218,7 +216,7 @@ Maintenant, on peut voir s’afficher la phrase qu’on a mis dans html dans not
 
 ![alt text](https://github.com/NinhLan/Projet_dockerCompose_NINH/blob/5439c9e47e2948a2e2d0eb857901f582970703d2/images/b.png?raw=true)
  
-Ou dans une navigateur web  
+Ou dans notre navigateur web  
 
 ![alt text](https://github.com/NinhLan/Projet_dockerCompose_NINH/blob/5439c9e47e2948a2e2d0eb857901f582970703d2/images/a.png?raw=true)
  
