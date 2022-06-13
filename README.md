@@ -144,7 +144,7 @@ WORKDIR /serveur/
 
  ## Docker Compose  
 Maintenant nous allons éditer le fichier 'docker-compose.yml' à la racine du dépôt.
-```
+```yml
 # docker-compose fonctionne avec des services.
 # 1 service = 1 conteneur.
 # Par exemple, un service peut être un serveur, un client
